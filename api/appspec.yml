@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/pi/server
+permissions:
+  - object: /home/pi/server
+    pattern: "**"
+    owner: pi
+    group: pi
+hooks:
+  ApplicationStop:
+     - location: scripts/application_stop
+       timeout: 300
+       runas: pi
+  BeforeInstall:
+    - location: scripts/before_install
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/after_install
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/application_start
+      timeout: 60
+      runas: pi

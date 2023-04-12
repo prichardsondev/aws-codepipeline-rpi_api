@@ -1,0 +1,82 @@
+Legend: [] = notes, everything else is commands
+
+[-- install aws cli v1.19 Raspberry PI OS - v2 below if you prefer]
+
+sudo apt install awscli
+
+[-- install aws cli v2 Raspberry PI OS ]
+
+sudo apt update && sudo apt upgrade -y
+
+sudo reboot
+
+sudo apt install git -y
+
+sudo apt install pip -y
+
+git clone https://github.com/aws/aws-cli.git
+
+cd aws-cli
+
+git switch v2
+
+pip install -r requirements.txt
+
+pip install .
+
+sudo reboot
+
+aws --v
+
+
+[-- configure aws cli - use 'aws configure --profile profileName' if you don't want default profile]
+
+aws configure
+
+...
+
+[-- test aws cli config]
+    
+aws s3 ls
+
+[-- configure aws cli with proper credentials - codedeploy, createusers - admin would do the trick]
+[-- you can find specific credentials for this process in aws docs]
+
+aws configure
+...
+
+[-- register with codedeploy]
+[-- change new-user-in-your-account]
+[-- change some-key]
+[-- change to your region]
+[-- this will create a new user - few other steps if you want to use same user you set credentials up with]
+aws deploy register --instance-name new-user-in-your-account --tags Key=Name,Value=some-key --region us-east-1
+
+[-- copy output for reference - although info will be in codedeploy.onpremises.yml file]
+
+[-- install codedeploy agent]
+
+sudo apt install ruby-full -y
+
+[change region as necessary]
+sudo wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
+
+sudo chmod +x ./install
+
+sudo ./install auto
+
+[-- you many have to move codedeploy.onpremises.yml if not done]
+[check]
+cat /etc/codedeploy-agent/conf/codedeploy.onpremises.yml
+[move if needed]
+sudo mv codedeploy.onpremises.yml /etc/codedeploy-agent/conf/
+[-- check agent status for 'active running' ctrl+c to exit']
+sudo service codedeploy-agent status
+
+[-- if not running]
+sudo service codedeploy-agent start
+
+[--hook up your pipeline - works like a charm]
+
+[-- unregister if needed]
+sudo aws deploy deregister --instance-name nameuregisteredwithabove

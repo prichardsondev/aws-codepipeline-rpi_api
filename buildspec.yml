@@ -1,0 +1,28 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      # - apt-get update -y
+      # - apt-get install -y zip unzip
+    # runtime-versions:
+      # nodejs: 14
+  pre_build:
+    commands:
+      # - echo Installing source NPM dependencies...
+      # - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the NodeJS App
+      - cd api
+      - zip -r web_deploy.zip .
+      # - npm test
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  type: zip
+  files:
+    - '**/*'
+  base-directory: api
+  discard-paths: 'no'
