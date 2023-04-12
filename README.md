@@ -1,13 +1,12 @@
 
 
 ## Raspberry Pi Service
-- project set up to work with aws cicd pipeline
+- project to work with aws cicd pipeline
 
-## S3 Bucket
-- any s3 bucket you (your credentials) have permission to write to
-
-## DynamoDB
--- PI
+## Devices
+- Raspberry Pi
+- Pi Camera
+- DHT 11/22 temp sensor
 
 ### Endpoints
 - /
@@ -17,26 +16,26 @@
 - /health
   ```
   {
-    "uptime": 990.160930002,
-    "message": "Ok",
-    "timestamp": 1646572392333
+      uptime: 3.723388761,
+      message: 'Ok',
+      timestamp: 1681318787870,
+      machineID: 'develop'
   }
   ```
 - /temp
   ```
-  {
-    "temp": "17.00",
-    "uuid": "260s6sYl9KOHm1MggmpuZ3dsV5v",
-    "machineID": "02"
+  { 
+    temp: '29.00', 
+    timestamp: 1681318996432, 
+    machineID: 'develop' 
   }
   ```
 - /image
   ```
-  {
-    "imageUrl": "/home/pi/server/public/images/1646572466933.jpg",
-    "timestamp": 1646572466933,
-    "machineID": "02",
-    "uuid": "260tja9Qw1O7OI2v1iL48aU7wey"
+  { 
+      output: '/home/pi/vscode/cicd-sensor-api/api/public/images/1681318943361.jpg',
+      timestamp: 1681318943361,
+      machineID: 'develop'
   }
   ```
 
@@ -65,7 +64,9 @@ MACHINE_ID=someid
   - nodemon app.js
 
 
-### Startup - when done testing
+### Startup - when done testing (note I use pm2 in  /scripts/application_start)
+- node app.js
+- or
 - sudo npm install -g pm2
 - pm2 start app.js
 
