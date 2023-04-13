@@ -1,7 +1,9 @@
-
-
 ## Raspberry Pi Service
-- project to work with aws cicd pipeline
+- express api with endpoints for temp, health, image
+- project setup to work with aws codepipeline
+
+## Video Overview
+[Video](https://www.youtube.com/playlist?list=PLlnL61QfD9UaiZyHimpAwI4dJpqrRVue5)
 
 ## Devices
 - Raspberry Pi
@@ -44,10 +46,10 @@
 - get credentials
   - IAM -> Users -> You -> Security Credentials -> HTTPS Git credentials for AWS CodeCommit
   - git config --global credential.helper 'store --file ~/.my-credentials'
-  - will store credentials on Pi to keep from entering on every push
-- git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/cicd-sensor-api
+    -  will store credentials on Pi to keep from entering on every push
+- git clone https://github.com/prichardsondev/aws-codepipeline-rpi_api.git
 - Enter credentials
-- cd cicd-sensor-api
+- cd aws-codepipeline-rpi_api
 - npm i
 
 ### .env file
@@ -59,12 +61,9 @@ CLIENT=yourname
 MACHINE_ID=someid
 ```
 
-### Testing
-- dev mode - restart server on startup
-  - nodemon app.js
 
-
-### Startup - when done testing (note I use pm2 in  /scripts/application_start)
+### Testing on dev machine / note you could also install nodemon
+### Note startup is automatic on remote machine via codedeploy script
 - node app.js
 - or
 - sudo npm install -g pm2

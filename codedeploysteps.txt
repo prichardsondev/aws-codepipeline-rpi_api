@@ -79,4 +79,4 @@ sudo service codedeploy-agent start
 [--hook up your pipeline - works like a charm]
 
 [-- unregister if needed]
-sudo aws deploy deregister --instance-name nameuregisteredwithabove
+aws deploy deregister --instance-name nameuregisteredwithabove
