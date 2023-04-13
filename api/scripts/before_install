@@ -2,5 +2,6 @@
 rm -rf /home/pi/server
 mkdir -m 777 /home/pi/server
 cp /home/pi/.env /home/pi/server/.env
+curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash
+apt-get install -y nodejs
 npm install -g pm2
-
